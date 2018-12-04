@@ -21,9 +21,9 @@
 
 const userInput = prompt("Ввести число необходимых мест");
 
+const taba = 6;
 const sharm = 15;
 const hurgada = 25;
-const taba = 6;
 
 const wrongDate = "Ошибка ввода!";
 const pushCancel = "Нам очень жаль, приходите еще!";
@@ -35,6 +35,7 @@ if (!userInput) {
   let isUserAgree;
   let groupName = "";
 
+  // Taba grop
   if (userInput <= taba) {
     groupName = '"Taba"';
     isUserAgree = confirm(
@@ -44,8 +45,30 @@ if (!userInput) {
     if (isUserAgree) {
       alert(`Приятного путешествия в группе ${groupName}!`);
     } else {
-      alert(pushCancel);
+      // When Sharm grop
+      groupName = '"Sharm"';
+      isUserAgree = confirm(
+        `Есть место в группе ${groupName}, согласны ли Вы быть в этой группе?`
+      );
+
+      if (isUserAgree) {
+        alert(`Приятного путешествия в группе ${groupName}!`);
+      } else {
+        // When Hurgada grop
+        groupName = '"Hurgada"';
+        isUserAgree = confirm(
+          `Есть место в группе ${groupName}, согласны ли Вы быть в этой группе?`
+        );
+
+        if (isUserAgree) {
+          alert(`Приятного путешествия в группе ${groupName}!`);
+        } else {
+          alert(pushCancel);
+        }
+      }
     }
+
+    // Sharm grop
   } else if (userInput <= sharm) {
     groupName = '"Sharm"';
     isUserAgree = confirm(
@@ -55,8 +78,20 @@ if (!userInput) {
     if (isUserAgree) {
       alert(`Приятного путешествия в группе ${groupName}!`);
     } else {
-      alert(pushCancel);
+      // When Hurgada grop
+      groupName = '"Hurgada"';
+      isUserAgree = confirm(
+        `Есть место в группе ${groupName}, согласны ли Вы быть в этой группе?`
+      );
+
+      if (isUserAgree) {
+        alert(`Приятного путешествия в группе ${groupName}!`);
+      } else {
+        alert(pushCancel);
+      }
     }
+
+    // Hurgada grop
   } else if (userInput <= hurgada) {
     groupName = '"Hurgada"';
     isUserAgree = confirm(
