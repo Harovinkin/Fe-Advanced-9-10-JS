@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 /**
 Напишите скрипт имитирующий авторизацию пользователя.
@@ -10,9 +10,8 @@
   - проверить содержит ли массив passwords пароль введенный пользователем.
 
 Пароль можно ввести не верно 
-  - всего n раз, 
-    - кол-во хранится в переменной attempts.
-  - Подсказка: используйте цикл do...while.
+  - всего n раз, кол-во хранится в переменной attempts.
+  >>> Подсказка: используйте цикл do...while.
 
 Если был введен пароль который есть в массиве passwords, 
   - вывести alert с текстом 'Добро пожаловать!' 
@@ -37,6 +36,35 @@
   - прекратить выполнение цикла.
  */
 
+const passwords = ["qwerty", "111qwe", "123123", "r4nd0mp4zzw0rd"];
 
-const passwords = ['qwerty', '111qwe', '123123', 'r4nd0mp4zzw0rd'];
+let userInput;
+
+let isPasswordRight;
+
 let attempts = 3;
+
+const welcome = "Добро пожаловать!";
+
+const attemptsRunOut = "У вас закончились попытки, аккаунт заблокирован!";
+
+do {
+  userInput = prompt("Введите пароль");
+
+  isPasswordRight = passwords.includes(userInput);
+
+  if (!userInput) {
+    break;
+  } else if (attempts === 1) {
+    alert(attemptsRunOut);
+    break;
+  } else if (isPasswordRight) {
+    alert(welcome);
+    break;
+  } else {
+    attempts -= 1;
+    alert(`Неверный пароль, у вас осталось ${attempts} попыток`);
+  }
+} while (true);
+
+console.log("Код после цикла");
