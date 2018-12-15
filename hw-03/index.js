@@ -54,14 +54,10 @@
 const logins = ["Mango", "robotGoogles", "Poly", "Aj4x1sBozz", "qwerty123"];
 
 // Проверка на валидное количество символов в имени логина
-const isLoginValid = function(login) {
-  return login.length >= 4 && login.length <= 16;
-};
+const isLoginValid = login => login.length >= 4 && login.length <= 16;
 
 // Проверка на нуникальность имени логина
-const isLoginUnique = function(allLogins, login) {
-  return allLogins.includes(login);
-};
+const isLoginUnique = (allLogins, login) => allLogins.includes(login);
 
 // Добавление нового логина при условии прохождения условий
 const addLogin = function(allLogins, login) {
