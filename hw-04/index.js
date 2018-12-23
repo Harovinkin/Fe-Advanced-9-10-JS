@@ -126,7 +126,7 @@ const cashier = {
   error: null,
 
   greet() {
-    console.log(`Добрый день, вас обслуживает ${this.name}`);
+    console.log(`Добрый день, вас обслуживает ${this.name}.`);
   },
 
   getCustomerMoney(value) {
@@ -142,6 +142,7 @@ const cashier = {
         total += order[product] * allProducts[product];
       }
     }
+
     this.totalPrice = total;
   },
 
