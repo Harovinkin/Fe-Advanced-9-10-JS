@@ -3,8 +3,6 @@
 /*
 Поля будущего объекта кассира (🔔 объявляются как this.имя_поля в конструкторе):
 
-Поля будущего объекта кассира (🔔 объявляются как this.имя_поля в конструкторе):
-
 name
 
 - строка,
@@ -140,16 +138,16 @@ function Cashier(name = '') {
   };
 
   this.countTotalPrice = function(allProducts, order) {
-    let result = 0;
-    const products = Object.keys(order);
+    const orderKeys = Object.keys(order);
+    let total = 0;
 
-    for (const product of products) {
-      if (allProducts[product]) {
-        result += allProducts[product] * order[product];
+    for (const key of orderKeys) {
+      if (allProducts[key]) {
+        total += allProducts[key] * order[key];
       }
     }
 
-    this.totalPrice = result;
+    this.totalPrice = total;
   };
 
   this.countChange = function() {
@@ -180,11 +178,11 @@ function Cashier(name = '') {
 }
 
 const poly = new Cashier('Poly');
-// const mango = new Cashier('Mango');
-// const ajax = new Cashier('Ajax');
+const mango = new Cashier('Mango');
+const ajax = new Cashier('Ajax');
 
-// console.log(mango); // объект со свойствами и name содержит значение Mango
-// console.log(ajax); // объект со свойствами и name содержит значение Ajax
+console.log(mango); // объект со свойствами и name содержит значение Mango
+console.log(ajax); // объект со свойствами и name содержит значение Ajax
 
 // // Проверяем исходные значения полей
 console.log(poly.name); // Poly
