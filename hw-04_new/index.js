@@ -74,7 +74,7 @@ const notebook = {
     }
   },
 
-  updateNoteContent(id, { title, body }) {
+  updateNoteContent(id, updatedContent) {
     /*
       Обновляет контент заметки
       updatedContent - объект с полями вида {имя: значение, имя: значение}
@@ -83,10 +83,17 @@ const notebook = {
       Принимает: идентификатор заметки и объект, полями которого надо обновить заметку
       Возвращает: обновленную заметку
     */
-
     const note = this.findNoteById(id);
-    if (title) note.title = title;
-    if (body) note.body = body;
+    if (!note) return;
+
+    const keys = Object.keys(updatedContent);
+
+    for (const key of keys) {
+      const hasKey = note.hasOwnProperty(key);
+
+      if (!hasKey) continue;
+      note[key] = updatedContent[key];
+    }
 
     return note;
   },
@@ -100,7 +107,11 @@ const notebook = {
     */
     const note = this.findNoteById(id);
 
-    return (note.priority = priority);
+    if (!note) return;
+
+    note.priority = priority;
+
+    return note;
   },
 
   filterNotes(query = '') {
@@ -222,8 +233,11 @@ console.log(
   Обновим контент заметки с id 3
 */
 console.log(
-  notebook.updateNoteContent(3, { title: 'Get comfy with React.js or Vue.js' }),
+  notebook.updateNoteContent(3, {
+    title: 'Get comfy with React.js or Vue.js',
+  }),
 );
+
 console.log(
   'Заметки после обновления контента заметки с id 3: ',
   notebook.getNotes(),
@@ -235,12 +249,12 @@ console.log(
 notebook.deleteNote(2);
 console.log('Заметки после удаления с id 2: ', notebook.getNotes());
 
-notebook.getNotes();
+console.log(notebook.getNotes());
 
 /*
 Решил отфильтровать заметки по приоритету
 */
 console.log(
-  'Отфильтровали заметки по приоритету: ',
-  notebook.filterByPriority(PRIORITY_TYPES.HIGH),
+  'Отфильтровали заметки по приоритету PRIORITY_TYPES.NORMAL: ',
+  notebook.filterByPriority(PRIORITY_TYPES.NORMAL),
 );
