@@ -1,13 +1,20 @@
 'use strict';
 
 /*
-NOTE Schema
-
-id: string | integer - - уникальный идентификатор объекта, чтобы можно было найти его в коллекции.
-title: string - заголовок заметки, строка.
-body: string - текст заметки, строка.
-priority: integer [0-2] -  значение приоритета, от 0 (низкий) до 2 (высокий).
-*/
+ * NOTE Schema
+ *
+ * id: string | integer
+ *   - уникальный идентификатор объекта, чтобы можно было найти  его в коллекции.
+ *
+ * title: string
+ *   - заголовок заметки, строка.
+ *
+ * body: string
+ *   - текст заметки, строка.
+ *
+ * priority: integer [0-2]
+ *   -  значение приоритета, от 0 (низкий) до 2 (высокий).
+ */
 
 // MAP of PRIORITY
 
@@ -17,27 +24,27 @@ const PRIORITY_TYPES = {
   HIGH: 2,
 };
 
-// NOTEBOOK Obj
+// NOTEPAD Obj
 
-const notebook = {
+const notepad = {
   notes: [],
 
   getNotes() {
     /*
-      Принимает: ничего
-      Возвращает: все заметки, значение свойства notes
-    */
+     * Принимает: ничего
+     * Возвращает: все заметки, значение свойства notes
+     */
 
     return this.notes;
   },
 
   findNoteById(id) {
     /*
-      Ищет заметку в массиве notes
-
-      Принимает: идентификатор заметки
-      Возвращает: заметку с совпавшим полем id или undefined если ничего не найдено
-    */
+     * Ищет заметку в массиве notes
+     *
+     * Принимает: идентификатор заметки
+     * Возвращает: заметку с совпавшим полем id или undefined если ничего не найдено
+     */
 
     for (const note of this.notes) {
       if (note.id !== id) continue;
@@ -47,11 +54,11 @@ const notebook = {
 
   saveNote(note) {
     /*
-      Сохраняет заметку в массив notes
-
-      Принимает: объект заметки
-      Возвращает: сохраненную заметку
-    */
+     * Сохраняет заметку в массив notes
+     *
+     * Принимает: объект заметки
+     * Возвращает: сохраненную заметку
+     */
 
     this.notes.push(note);
 
@@ -60,11 +67,11 @@ const notebook = {
 
   deleteNote(id) {
     /*
-      Удаляет заметку по идентификатору из массива notes
-
-      Принимает: идентификатор заметки
-      Возвращает: ничего
-    */
+     * Удаляет заметку по идентификатору из массива notes
+     *
+     * Принимает: идентификатор заметки
+     * Возвращает: ничего
+     */
 
     for (let i = 0; i < this.notes.length; i += 1) {
       if (this.notes[i].id !== id) continue;
@@ -76,13 +83,14 @@ const notebook = {
 
   updateNoteContent(id, updatedContent) {
     /*
-      Обновляет контент заметки
-      updatedContent - объект с полями вида {имя: значение, имя: значение}
-      Свойств в объекте updatedContent может быть произвольное количество
+     * Обновляет контент заметки
+     * updatedContent - объект с полями вида {имя: значение, имя: значение}
+     * Свойств в объекте updatedContent может быть произвольное количество
+     *
+     * Принимает: идентификатор заметки и объект, полями которого надо обновить заметку
+     * Возвращает: обновленную заметку
+     */
 
-      Принимает: идентификатор заметки и объект, полями которого надо обновить заметку
-      Возвращает: обновленную заметку
-    */
     const note = this.findNoteById(id);
     if (!note) return;
 
@@ -100,11 +108,12 @@ const notebook = {
 
   updateNotePriority(id, priority) {
     /*
-      Обновляет приоритет заметки
+     * Обновляет приоритет заметки
+     *
+     * Принимает: идентификатор заметки и ее новый приоритет
+     * Возвращает: обновленную заметку
+     */
 
-      Принимает: идентификатор заметки и ее новый приоритет
-      Возвращает: обновленную заметку
-    */
     const note = this.findNoteById(id);
 
     if (!note) return;
@@ -114,14 +123,14 @@ const notebook = {
     return note;
   },
 
-  filterNotes(query = '') {
+  filterNotesByQuery(query = '') {
     /*
-      Фильтрует массив заметок по подстроке query.
-      Если значение query есть в заголовке или теле заметки, то она подходит
-
-      Принимает: подстроку для поиска в title и body заметки
-      Возвращает: новый массив заметок, контент которых содержит подстроку
-    */
+     * Фильтрует массив заметок по подстроке query.
+     * Если значение query есть в заголовке или теле заметки - она подходит
+     *
+     * Принимает: подстроку для поиска в title и body заметки
+     * Возвращает: новый массив заметок, контент которых содержит подстроку
+     */
 
     const filteredNotes = [];
 
@@ -138,11 +147,14 @@ const notebook = {
     return filteredNotes;
   },
 
-  filterByPriority(priority) {
+  filterNotesByPriority(priority) {
     /*
-    Принимает: приоритет.
-    Возвращает: новый массив только с теми заметками, приоритет которых, подходит.
-    */
+     * Фильтрует массив заметок по значению приоритета
+     * Если значение priority совпадаем с приоритетом заметки - она подходит
+     *
+     * Принимает: приоритет для поиска в свойстве priority заметки
+     * Возвращает: новый массив заметок с подходящим приоритетом
+     */
 
     const filtredNotes = [];
 
@@ -158,9 +170,9 @@ const notebook = {
 // CODE CHECKING
 
 /*
-  Добавляю 4 заметки и смотрю что получилось
-*/
-notebook.saveNote({
+ * Добавляю 4 заметки и смотрю что получилось
+ */
+notepad.saveNote({
   id: 1,
   title: 'JavaScript essentials',
   body:
@@ -168,7 +180,7 @@ notebook.saveNote({
   priority: PRIORITY_TYPES.HIGH,
 });
 
-notebook.saveNote({
+notepad.saveNote({
   id: 2,
   title: 'Refresh HTML and CSS',
   body:
@@ -176,7 +188,7 @@ notebook.saveNote({
   priority: PRIORITY_TYPES.NORMAL,
 });
 
-notebook.saveNote({
+notepad.saveNote({
   id: 3,
   title: 'Get comfy with Frontend frameworks',
   body:
@@ -184,7 +196,7 @@ notebook.saveNote({
   priority: PRIORITY_TYPES.NORMAL,
 });
 
-notebook.saveNote({
+notepad.saveNote({
   id: 4,
   title: 'Winter clothes',
   body:
@@ -192,69 +204,62 @@ notebook.saveNote({
   priority: PRIORITY_TYPES.LOW,
 });
 
-console.log('Все текущие заметки: ', notebook.getNotes());
+console.log('Все текущие заметки: ', notepad.getNotes());
 
 /*
-  Зима уже близко, пора поднять приоритет на покупку одежды
-*/
-notebook.updateNotePriority(4, PRIORITY_TYPES.NORMAL);
+ * Зима уже близко, пора поднять приоритет на покупку одежды
+ */
+notepad.updateNotePriority(4, PRIORITY_TYPES.NORMAL);
 // Смотрю что у меня в заметках
 console.log(
   'Заметки после обновления приоритета для id 4: ',
-  notebook.getNotes(),
+  notepad.getNotes(),
 );
 
 /*
-  Решил что фреймворки отложу немного, понижаю приоритет
-*/
-notebook.updateNotePriority(3, PRIORITY_TYPES.LOW);
+ * Решил что фреймворки отложу немного, понижаю приоритет
+ */
+notepad.updateNotePriority(3, PRIORITY_TYPES.LOW);
 console.log(
   'Заметки после обновления приоритета для id 3: ',
-  notebook.getNotes(),
+  notepad.getNotes(),
 );
 
 /*
-  Решил отфильтровать заметки по слову html
-*/
+ * Решил отфильтровать заметки по слову html
+ */
 console.log(
   'Отфильтровали заметки по ключевому слову "html": ',
-  notebook.filterNotes('html'),
+  notepad.filterNotesByQuery('html'),
 );
 
 /*
-  Решил отфильтровать заметки по слову javascript
-*/
+ * Решил отфильтровать заметки по слову javascript
+ */
 console.log(
   'Отфильтровали заметки по ключевому слову "javascript": ',
-  notebook.filterNotes('javascript'),
+  notepad.filterNotesByQuery('javascript'),
 );
 
 /*
-  Обновим контент заметки с id 3
-*/
+ * Хочу посмотреть только заметки с нормальным приоритетом
+ */
 console.log(
-  notebook.updateNoteContent(3, {
-    title: 'Get comfy with React.js or Vue.js',
-  }),
+  'Отфильтровали заметки по нормальному приоритету: ',
+  notepad.filterNotesByPriority(PRIORITY_TYPES.NORMAL),
 );
 
+/*
+ * Обновим контент заметки с id 3
+ */
+notepad.updateNoteContent(3, { title: 'Get comfy with React.js or Vue.js' });
 console.log(
   'Заметки после обновления контента заметки с id 3: ',
-  notebook.getNotes(),
+  notepad.getNotes(),
 );
 
 /*
-  Повторил HTML и CSS, удаляю запись c id 2
-*/
-notebook.deleteNote(2);
-console.log('Заметки после удаления с id 2: ', notebook.getNotes());
-
-console.log(notebook.getNotes());
-
-/*
-Решил отфильтровать заметки по приоритету
-*/
-console.log(
-  'Отфильтровали заметки по приоритету PRIORITY_TYPES.NORMAL: ',
-  notebook.filterByPriority(PRIORITY_TYPES.NORMAL),
-);
+ * Повторил HTML и CSS, удаляю запись c id 2
+ */
+notepad.deleteNote(2);
+console.log('Заметки после удаления с id 2: ', notepad.getNotes());
