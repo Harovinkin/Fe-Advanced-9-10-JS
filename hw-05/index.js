@@ -175,13 +175,7 @@ Notepad.PRIORITIES = {
 Notepad.getPriorityName = function getPriorityName(priorityId) {
   // Ваш код
 
-  const keys = Object.keys(this.PRIORITIES);
-
-  for (const key of keys) {
-    if (priorityId !== Number(key)) continue;
-
-    return this.PRIORITIES[key].name;
-  }
+  return this.PRIORITIES[priorityId].name;
 };
 
 /*
