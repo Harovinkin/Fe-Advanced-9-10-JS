@@ -97,9 +97,7 @@ const notepad = {
     const keys = Object.keys(updatedContent);
 
     for (const key of keys) {
-      const hasKey = note.hasOwnProperty(key);
-
-      if (!hasKey) continue;
+      if (!note[key]) continue;
       note[key] = updatedContent[key];
     }
 
