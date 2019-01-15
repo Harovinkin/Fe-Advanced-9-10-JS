@@ -95,9 +95,12 @@ const notepad = {
     if (!note) return;
 
     const keys = Object.keys(updatedContent);
+    const keysOfNote = Object.keys(note);
 
     for (const key of keys) {
-      if (!note[key]) continue;
+      const hasKey = keysOfNote.includes(key);
+
+      if (!hasKey) continue;
       note[key] = updatedContent[key];
     }
 
