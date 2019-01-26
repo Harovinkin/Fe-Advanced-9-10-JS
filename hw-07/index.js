@@ -154,7 +154,7 @@ console.log(getUsersWithAge(users, 30, 40));
  * Получить общую сумму баланса (поле balance) всех пользователей.
  */
 const getTotalBalance = users =>
-  users.reduce((usersBallance, user) => (usersBallance += user.balance), 0);
+  users.reduce((usersBallance, user) => usersBallance + user.balance, 0);
 
 console.log(getTotalBalance(users)); // 20916
 
@@ -170,3 +170,40 @@ const getUsersByFriend = (users, name) =>
 
 console.log(getUsersByFriend(users, 'Briana Decker')); // [ 'Sharlene Bush', 'Sheree Anthony' ]
 console.log(getUsersByFriend(users, 'Goldie Gentry')); // [ 'Elma Head', 'Sheree Anthony' ]
+
+// =====================================================================================================================
+// ⚠️ ВЫПОЛНЯТЬ ПО ЖЕЛАНИЮ
+// =====================================================================================================================
+
+/**
+ * Получить массив всех умений всех пользователей (поле skills), при этом не должно быть повторяющихся умений и они должны быть отсортированы в алфавитном порядке
+ */
+
+const getUniqueSkills = users =>
+  users
+    .reduce((totalSkills, user) => {
+      totalSkills.push(...user.skills);
+
+      return totalSkills;
+    }, [])
+    .reduce((uniqSkills, skill) => {
+      !uniqSkills.includes(skill) ? uniqSkills.push(skill) : uniqSkills;
+
+      return uniqSkills;
+    }, [])
+    .sort();
+
+console.log(getUniqueSkills(users));
+// [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
+
+/**
+ * Массив имен (поле name) людей, отсортированных в зависимости от количества их друзей (поле friends)
+ */
+
+const getNamesSortedByFriendsCount = users =>
+  users
+    .sort((userA, userB) => userA.friends.length - userB.friends.length)
+    .map(user => user.name);
+
+console.log(getNamesSortedByFriendsCount(users));
+// [ 'Moore Hensley', 'Sharlene Bush', 'Elma Head', 'Carey Barr', 'Blackburn Dotson', 'Sheree Anthony', 'Ross Vazquez' ]
