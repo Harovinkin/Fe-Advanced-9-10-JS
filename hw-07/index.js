@@ -187,7 +187,7 @@ const getUniqueSkills = users =>
       return totalSkills;
     }, [])
     .reduce((uniqSkills, skill) => {
-      !uniqSkills.includes(skill) ? uniqSkills.push(skill) : uniqSkills;
+      if (!uniqSkills.includes(skill)) uniqSkills.push(skill);
 
       return uniqSkills;
     }, [])
