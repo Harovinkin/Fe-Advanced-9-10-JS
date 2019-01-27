@@ -116,7 +116,9 @@ console.log(getUsersByEyeColor(users, 'blue')); // [объект Moore Hensley, 
  */
 const getUsersByGender = (users, gender) =>
   users.reduce((allNames, user) => {
-    if (user.gender === gender) allNames.push(user.name);
+    if (user.gender === gender) {
+      allNames.push(user.name);
+    }
 
     return allNames;
   }, []);
@@ -163,7 +165,9 @@ console.log(getTotalBalance(users)); // 20916
  */
 const getUsersByFriend = (users, name) =>
   users.reduce((usersNames, user) => {
-    if (user.friends.includes(name)) usersNames.push(user.name);
+    if (user.friends.includes(name)) {
+      usersNames.push(user.name);
+    }
 
     return usersNames;
   }, []);
@@ -187,7 +191,9 @@ const getUniqueSkills = users =>
       return totalSkills;
     }, [])
     .reduce((uniqSkills, skill) => {
-      if (!uniqSkills.includes(skill)) uniqSkills.push(skill);
+      if (!uniqSkills.includes(skill)) {
+        uniqSkills.push(skill);
+      }
 
       return uniqSkills;
     }, [])
