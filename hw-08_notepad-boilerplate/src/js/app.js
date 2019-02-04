@@ -282,11 +282,15 @@ const initialNotes = [
 
 </li>
  */
+
+// Инициализация экземпляра заметок
+
 const notepad = new Notepad(initialNotes);
+
 
 const createNoteContent = (title, body) => {
   const contentBox = document.createElement('div');
-  contentBox.classList.add('note__conten');
+  contentBox.classList.add('note__content');
 
   const noteTitle = document.createElement('h2');
   noteTitle.classList.add('note__title');
@@ -299,6 +303,13 @@ const createNoteContent = (title, body) => {
   contentBox.append(noteTitle, noteBody);
 
   return contentBox;
+};
+
+const createFooterSection = () => {
+  const footerSection = document.createElement('section');
+  footerSection.classList.add('note__section');
+
+  return footerSection;
 };
 
 const createActionButton = (noteAction, iconType) => {
@@ -324,16 +335,11 @@ const createNotePriority = priority => {
   return notePriority;
 };
 
-const createFooterSection = () => {
-  const footerSection = document.createElement('section');
-  footerSection.classList.add('note__section');
-
-  return footerSection;
-};
-
 const createNoteFooter = priority => {
   const noteFooter = document.createElement('footer');
   noteFooter.classList.add('note__footer');
+
+  // Секция приоритетов
 
   const prioritySection = createFooterSection();
 
@@ -351,6 +357,8 @@ const createNoteFooter = priority => {
   );
 
   const notePriority = createNotePriority(priority);
+
+  // Секция редактирования
 
   const editSection = createFooterSection();
 
@@ -385,8 +393,6 @@ const createListItem = ({ id, title, body, priority }) => {
   noteBox.append(noteContent, noteFooter);
 
   listItem.appendChild(noteBox);
-
-  console.log(listItem);
 
   return listItem;
 };
