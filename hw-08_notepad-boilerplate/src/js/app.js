@@ -1,6 +1,9 @@
 'use strict';
 
 // Конструктор Notepad при инициализации принимает массив заметок
+
+//  Model
+
 class Notepad {
   constructor(notes = []) {
     this._notes = notes;
@@ -35,6 +38,7 @@ class Notepad {
 
     for (const note of this.notes) {
       if (note.id !== id) continue;
+
       return note;
     }
   }
@@ -62,6 +66,7 @@ class Notepad {
 
     for (let i = 0; i < this.notes.length; i += 1) {
       if (this.notes[i].id !== id) continue;
+
       this.notes.splice(i, 1);
 
       return;
@@ -88,6 +93,7 @@ class Notepad {
       const hasKey = noteKeys.includes(key);
 
       if (!hasKey) continue;
+
       note[key] = updatedContent[key];
     }
 
@@ -129,6 +135,7 @@ class Notepad {
       const hasQuery = noteContent.toLowerCase().includes(query);
 
       if (!hasQuery) continue;
+
       filteredNotes.push(note);
     }
 
@@ -148,6 +155,7 @@ class Notepad {
 
     for (const note of this.notes) {
       if (note.priority !== priority) continue;
+
       filtredNotes.push(note);
     }
 
@@ -228,7 +236,7 @@ const initialNotes = [
   },
 ];
 
-//  Разметка заметки
+//  Markup
 
 /*
  <li class="note-list__item" data-id="note object id here">
@@ -283,10 +291,17 @@ const initialNotes = [
 </li>
  */
 
-// Инициализация экземпляра заметок
+// Notepad Instance initialization
 
 const notepad = new Notepad(initialNotes);
 
+// Refs
+
+const refs = {
+  list: document.querySelector('.note-list'),
+};
+
+// UI
 
 const createNoteContent = (title, body) => {
   const contentBox = document.createElement('div');
@@ -339,7 +354,7 @@ const createNoteFooter = priority => {
   const noteFooter = document.createElement('footer');
   noteFooter.classList.add('note__footer');
 
-  // Секция приоритетов
+  // Priority Section
 
   const prioritySection = createFooterSection();
 
@@ -358,7 +373,7 @@ const createNoteFooter = priority => {
 
   const notePriority = createNotePriority(priority);
 
-  // Секция редактирования
+  // Edit Section
 
   const editSection = createFooterSection();
 
@@ -403,6 +418,4 @@ const renderNoteList = (listRef, notes) => {
   listRef.append(...listItems);
 };
 
-const list = document.querySelector('.note-list');
-
-renderNoteList(list, notepad.notes);
+renderNoteList(refs.list, notepad.notes);
