@@ -3,7 +3,6 @@
 // Конструктор Notepad при инициализации принимает массив заметок
 
 //  Model
-
 class Notepad {
   constructor(notes = []) {
     this._notes = notes;
@@ -292,17 +291,14 @@ const initialNotes = [
  */
 
 // Notepad Instance initialization
-
 const notepad = new Notepad(initialNotes);
 
 // Refs
-
 const refs = {
   list: document.querySelector('.note-list'),
 };
 
 // UI
-
 const createNoteContent = (title, body) => {
   const contentBox = document.createElement('div');
   contentBox.classList.add('note__content');
@@ -355,7 +351,6 @@ const createNoteFooter = priority => {
   noteFooter.classList.add('note__footer');
 
   // Priority Section
-
   const prioritySection = createFooterSection();
 
   const NOTE_ACTIONS = Notepad.NOTE_ACTIONS;
@@ -374,7 +369,6 @@ const createNoteFooter = priority => {
   const notePriority = createNotePriority(priority);
 
   // Edit Section
-
   const editSection = createFooterSection();
 
   const editButton = createActionButton(NOTE_ACTIONS.EDIT, ICON_TYPES.EDIT);
