@@ -346,12 +346,20 @@ const addListItem = (listRef, note) => {
   listRef.appendChild(listItem);
 };
 
-renderNoteList(refs.list, notepad.notes);
+const removeListItem = item => {
+  const removeListItem = item.closest('.note-list__item');
+
+  notepad.deleteNote(removeListItem.dataset.id);
+
+  removeListItem.remove();
+};
+
+// Handlers
 
 /*
-Добавление заметки
+  Добавление заметки
 
-При сабмите формы form.note-editor в массив заметок экземпляра класса Notepad 
+  При сабмите формы form.note-editor в массив заметок экземпляра класса Notepad 
   Должен 
     - Добавляться новый объект, 
     - Свойства title и body которого вводит пользователь в поля формы.
@@ -389,7 +397,6 @@ renderNoteList(refs.list, notepad.notes);
         - добавлят этот элемент в конец списка ul.note-list (параметр listRef).
  */
 
-// Handlers
 const handleNoteEditorSubmit = e => {
   e.preventDefault();
 
@@ -409,32 +416,32 @@ const handleNoteEditorSubmit = e => {
 };
 
 /*
-Удаление заметки
+  Удаление заметки
 
-Следующий шаг это 
-  - Cделать удаление заметки по клику на кнопке с иконкой корзины, 
-    - то есть с data-action=delete-note. 
-    
-  - Используй паттерн делегированя событий для отслеживания клика на списке ul.note-list и 
-  - Проверяй куда кликнули, 
+  Следующий шаг это 
+    - Cделать удаление заметки по клику на кнопке с иконкой корзины, 
+      - то есть с data-action=delete-note. 
+      
+    - Используй паттерн делегированя событий для отслеживания клика на списке ul.note-list и 
+    - Проверяй куда кликнули, 
 
-    Доступ к объекту события у тебя есть.
+      Доступ к объекту события у тебя есть.
 
-Узнать какой именно элемент необходимо удалить довольно просто, 
-  У каждого элемента списка есть:
-    - data-атрибут 
-      - data-id в котором указан идентификатор объекта заметки, 
+  Узнать какой именно элемент необходимо удалить довольно просто, 
+    У каждого элемента списка есть:
+      - data-атрибут 
+        - data-id в котором указан идентификатор объекта заметки, 
 
-    Метод для удаления элемента из массива объектов у тебя уже есть.
+      Метод для удаления элемента из массива объектов у тебя уже есть.
 
-Для того чтобы получить ссылку на DOM-узел элемента списка и удалить его в интерфейсе, 
-  Используй методы:
-    - el.closest() и 
-    - el.remove(). 
-    
-    Напиши функцию removeListItem() 
-      Которая:
-        - скроет в себе реализацию удаления.
+  Для того чтобы получить ссылку на DOM-узел элемента списка и удалить его в интерфейсе, 
+    Используй методы:
+      - el.closest() и 
+      - el.remove(). 
+      
+      Напиши функцию removeListItem() 
+        Которая:
+          - скроет в себе реализацию удаления.
 */
 
 const handleRemoveNote = ({ target }) => {
@@ -443,19 +450,12 @@ const handleRemoveNote = ({ target }) => {
   removeListItem(target);
 };
 
-const removeListItem = item => {
-  const removeListItem = item.closest('.note-list__item');
-
-  notepad.deleteNote(removeListItem.dataset.id);
-
-  removeListItem.remove();
-};
-
 /*
-Фильтрация заметок
+  Фильтрация заметок
+
   Последним шагом будет фильтрация по подстроке. 
 
-Каждый раз когда в инпут формы form.search-form что-то вводится, 
+  Каждый раз когда в инпут формы form.search-form что-то вводится, 
   Необходимо 
     - фильтровать массив заметок. 
   
@@ -472,6 +472,8 @@ const handleSearchNotesByQuery = ({ target }) => {
 
   renderNoteList(refs.list, foundNotes);
 };
+
+renderNoteList(refs.list, notepad.notes);
 
 // Listeners
 refs.noteEditor.addEventListener('submit', handleNoteEditorSubmit);
