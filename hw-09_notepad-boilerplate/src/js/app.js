@@ -73,7 +73,6 @@ class Notepad {
      * Возвращает: ничего
      */
     const note = this.findNoteById(id);
-
     if (!note) return;
 
     this._notes = this._notes.filter(note => note.id !== id);
@@ -95,7 +94,7 @@ class Notepad {
       note.id === id ? { ...note, ...updatedContent } : note
     );
 
-    return (note = { ...note, ...updatedContent });
+    return this.findNoteById(id);
   }
 
   updateNotePriority(id, priority) {
@@ -105,6 +104,9 @@ class Notepad {
      * Принимает: идентификатор заметки и ее новый приоритет
      * Возвращает: обновленную заметку
      */
+    const note = this.findNoteById(id);
+    if (!note) return;
+
     this._notes = this._notes.map(note =>
       note.id === id ? { ...note, priority: priority } : note
     );
@@ -213,19 +215,6 @@ const initialNotes = [
 
 // Notepad Instance initialization
 const notepad = new Notepad(initialNotes);
-
-// console.table(notepad.notes);
-// console.table(notepad.findNoteById(2));
-// console.table(notepad.deleteNote(4));
-// console.table(notepad.filterNotesByQuery('Maybe'));
-// console.table(notepad.filterNotesByPriority(2));
-// console.table(notepad.updateNotePriority(1, Notepad.PRIORITY_TYPES.LOW));
-// console.table(
-//   notepad.updateNoteContent(1, {
-//     title: 'New Table',
-//     body: 'New text body...',
-//   })
-// );
 
 // Refs
 const refs = {
@@ -444,7 +433,7 @@ const handleNoteEditorSubmit = e => {
     - el.remove(). 
     
     Напиши функцию removeListItem() 
-      Которая 
+      Которая:
         - скроет в себе реализацию удаления.
 */
 

@@ -91,3 +91,16 @@
 
 </li>
  */
+
+// console.table(notepad.notes);
+// console.table(notepad.findNoteById(2));
+// console.table(notepad.deleteNote(4));
+// console.table(notepad.filterNotesByQuery('Maybe'));
+// console.table(notepad.filterNotesByPriority(2));
+// console.table(notepad.updateNotePriority(1, Notepad.PRIORITY_TYPES.LOW));
+// console.table(
+//   notepad.updateNoteContent(1, {
+//     title: 'New Table',
+//     body: 'New text body...',
+//   })
+// );
