@@ -131,10 +131,12 @@ export const addListItem = (listRef, note) => {
   listRef.appendChild(listItem);
 };
 
-export const removeListItem = item => {
-  const removeListItem = item.closest('.note-list__item');
+export const findParentListItem = child => {
+  const parentListItem = child.closest('.note-list__item');
 
-  notepad.deleteNote(removeListItem.dataset.id);
+  return parentListItem;
+};
 
-  removeListItem.remove();
+export const removeListItem = listItem => {
+  listItem.remove();
 };
