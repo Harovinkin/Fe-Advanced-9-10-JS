@@ -13,18 +13,18 @@ module.exports = ({ mode = 'production' }) =>
       entry: './src/index.js',
       output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
       },
       module: {
         rules: [
           {
             test: /\.js$/,
             exclude: /node_modules/,
-            use: 'babel-loader'
+            use: 'babel-loader',
           },
           {
             test: /\.html$/,
-            use: 'html-loader'
+            use: 'html-loader',
           },
           {
             test: /\.(gif|png|jpe?g|svg)$/i,
@@ -33,22 +33,22 @@ module.exports = ({ mode = 'production' }) =>
                 loader: 'url-loader',
                 options: {
                   name: '[path]/[name].[ext]',
-                  limit: 5000
-                }
-              }
-            ]
+                  limit: 5000,
+                },
+              },
+            ],
           },
           {
             test: /\.hbs$/,
-            loader: 'handlebars-loader'
-          }
-        ]
+            loader: 'handlebars-loader',
+          },
+        ],
       },
       plugins: [
         new CleanWebpackPlugin('dist'),
         new FriendlyErrorsWebpackPlugin(),
-        new WebpackBar()
-      ]
+        new WebpackBar(),
+      ],
     },
-    modeConfig(mode)
+    modeConfig(mode),
   );

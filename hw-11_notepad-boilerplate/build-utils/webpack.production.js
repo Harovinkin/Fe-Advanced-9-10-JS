@@ -8,20 +8,18 @@ module.exports = env => ({
     rules: [
       {
         test: /\.scss$/,
-        exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
-      }
-    ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: 'styles.css' }),
@@ -33,9 +31,9 @@ module.exports = env => ({
         removeRedundantAttributes: true,
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
-      }
+        useShortDoctype: true,
+      },
     }),
-    new OptimizeCssAssetsPlugin({})
-  ]
+    new OptimizeCssAssetsPlugin({}),
+  ],
 });

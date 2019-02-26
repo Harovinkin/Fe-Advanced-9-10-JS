@@ -4,23 +4,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = env => ({
   devtool: 'cheap-module-source-map',
   output: {
-    publicPath: '/'
+    publicPath: '/',
   },
   module: {
     rules: [
       {
         test: /\.scss$/,
-        exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
-      }
-    ]
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+    ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/index.html', minify: false })
+    new HtmlWebpackPlugin({ template: './src/index.html', minify: false }),
   ],
   devServer: {
     contentBase: path.resolve(__dirname, '../src'),
@@ -34,6 +33,6 @@ module.exports = env => ({
     clientLogLevel: 'warning',
     compress: true,
     open: true,
-    port: env.port
-  }
+    port: env.port,
+  },
 });
