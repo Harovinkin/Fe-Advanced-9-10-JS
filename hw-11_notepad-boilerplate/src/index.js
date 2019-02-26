@@ -16,19 +16,23 @@ import 'notyf/dist/notyf.min.css';
 
 // Notepad Instance initialization
 export const notepad = new Notepad(initialNotes);
+
 // UI Refs
 const refs = getRefs();
 const notyf = new Notyf();
 
 // Handlers
 
-// Open Modal Editor
+/**
+ * Open Modal Editor
+ */
 const handleOpenModal = () => {
   MicroModal.show('note-editor-modal');
 };
 
 /*
   Добавление заметки
+  ==================
   При сабмите формы form.note-editor в массив заметок экземпляра класса Notepad
   Должен
     - Добавляться новый объект,
@@ -84,6 +88,7 @@ const handleNoteEditorSubmit = e => {
 
 /*
   Удаление заметки
+  ================
   Следующий шаг это
     - Cделать удаление заметки по клику на кнопке с иконкой корзины,
       - то есть с data-action=delete-note.
@@ -129,13 +134,14 @@ const handleListClick = ({ target }) => {
 
     case Notepad.NOTE_ACTIONS.EDIT:
       // My code
-      alert(btnAction);
+      // alert(btnAction);
       break;
   }
 };
 
 /*
   Фильтрация заметок
+  ==================
   Последним шагом будет фильтрация по подстроке.
   Каждый раз когда в инпут формы form.search-form что-то вводится,
   Необходимо
