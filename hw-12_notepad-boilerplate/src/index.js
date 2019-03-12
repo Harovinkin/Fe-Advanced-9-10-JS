@@ -9,10 +9,13 @@ import {
   addListItemMarkup,
   findParentListItem,
   removeListItem,
-  inputStorageSavedModalText,
 } from './js/view';
 
 import storage from './js/local-storage/storage';
+import {
+  localStorageMessageSave,
+  inputStorageSavedModalText,
+} from './js/local-storage/localstorage';
 
 import './sass/main.scss';
 import 'notyf/dist/notyf.min.css';
@@ -20,8 +23,10 @@ import 'notyf/dist/notyf.min.css';
 // Notepad Instance initialization
 const initialNotesSorce = notes => {
   const localStorageNotes = storage.load(Notepad.LOCAL_STORAGE.NOTES_KEY);
+
   if (!localStorageNotes) {
     storage.save(Notepad.LOCAL_STORAGE.NOTES_KEY, notes);
+
     return notes;
   }
 
@@ -114,16 +119,9 @@ const handleSearchNotesByQuery = ({ target }) => {
 
 // Writing Modal's text in localStorage
 const handleModalTextInput = e => {
-  const localStorageMessageSave = () => {
-    const [text, body] = e.currentTarget.elements;
+  const modalInputFilds = e.currentTarget.elements;
 
-    storage.save(Notepad.LOCAL_STORAGE.MODAL_TEXT_KEY, {
-      text: text.value,
-      body: body.value,
-    });
-  };
-
-  localStorageMessageSave();
+  localStorageMessageSave(modalInputFilds, Notepad);
 };
 
 // Render Notes
