@@ -38,9 +38,3 @@ export const findParentListItem = child => {
 export const removeListItem = listItem => {
   listItem.remove();
 };
-
-export const inputStorageSavedModalText = (savedModalText, refs) => {
-  const [text, body] = refs.noteEditor.elements;
-  text.value = savedModalText.text;
-  body.value = savedModalText.body;
-};
