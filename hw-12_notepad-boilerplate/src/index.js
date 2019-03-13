@@ -101,7 +101,6 @@ const handleListClick = ({ target }) => {
 
     case Notepad.NOTE_ACTIONS.EDIT:
       // My code
-      // alert(btnAction);
       break;
   }
 };
