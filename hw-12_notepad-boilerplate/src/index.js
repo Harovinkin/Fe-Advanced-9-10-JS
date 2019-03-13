@@ -68,15 +68,14 @@ const handleNoteEditorSubmit = e => {
 
   notepad.saveNote(titleText, bodyText).then(savedNote => {
     addListItemMarkup(refs.notesList, savedNote, Notepad);
+
+    notyf.confirm(Notepad.NOTIFICATION_MESSAGES.NOTE_ADDED_SUCCESS);
+
+    MicroModal.close('note-editor-modal');
+
+    storage.del(Notepad.LOCAL_STORAGE.MODAL_TEXT_KEY);
   });
-
-  notyf.confirm(Notepad.NOTIFICATION_MESSAGES.NOTE_ADDED_SUCCESS);
-
-  MicroModal.close('note-editor-modal');
-
   e.currentTarget.reset();
-
-  storage.del(Notepad.LOCAL_STORAGE.MODAL_TEXT_KEY);
 };
 
 // Delete Note
@@ -93,9 +92,10 @@ const handleListClick = ({ target }) => {
 
       const listItemId = listItem.dataset.id;
 
-      notepad.deleteNote(listItemId).then(() => removeListItem(listItem));
-
-      notyf.confirm(Notepad.NOTIFICATION_MESSAGES.NOTE_DELETED_SUCCESS);
+      notepad.deleteNote(listItemId).then(() => {
+        removeListItem(listItem);
+        notyf.confirm(Notepad.NOTIFICATION_MESSAGES.NOTE_DELETED_SUCCESS);
+      });
 
       break;
 
