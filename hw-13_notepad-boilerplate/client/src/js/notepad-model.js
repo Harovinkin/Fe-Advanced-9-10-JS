@@ -1,4 +1,4 @@
-import * as api from '../servises/api';
+import * as api from './servises/api';
 
 import {
   PRIORITY_TYPES,
@@ -84,7 +84,7 @@ export default class Notepad {
     });
   }
 
-  updateNoteContent(id, updatedContent) {
+  updateNoteContent(id, { title, body }) {
     /*
      * Обновляет контент заметки
      * updatedContent - объект с полями вида {имя: значение, имя: значение}
@@ -93,7 +93,12 @@ export default class Notepad {
      * Принимает: идентификатор заметки и объект, полями которого надо обновить заметку
      * Возвращает: обновленную заметку
      */
-    return api.updateNote(id, updatedContent).then(updatedNote => {
+    const note = {
+      title,
+      body,
+    };
+
+    return api.updateNote(id, note).then(updatedNote => {
       this._notes.map(note =>
         note.id === updatedNote.id ? updatedNote.id : note,
       );
@@ -109,7 +114,11 @@ export default class Notepad {
      * Принимает: идентификатор заметки и ее новый приоритет
      * Возвращает: обновленную заметку
      */
-    return api.updateNote(id, updatedNotePriority).then(updatedPriority => {
+    const note = {
+      priority,
+    };
+
+    return api.updateNote(id, note).then(updatedPriority => {
       this._notes.map(note =>
         note.id === updatedPriority.id ? updatedPriority.id : note,
       );
