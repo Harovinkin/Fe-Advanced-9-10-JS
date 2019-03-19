@@ -128,7 +128,6 @@ notepad.getNotes
 
       return;
     }
-
     createListItemsMarkup(refs.notesList, notes, Notepad);
   })
   .catch(err => {
