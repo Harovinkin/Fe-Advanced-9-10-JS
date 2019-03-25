@@ -38,7 +38,7 @@ const getSavedNote = async (titleText, bodyText) => {
 
     storage.del(Notepad.LOCAL_STORAGE.MODAL_TEXT_KEY);
   } catch (err) {
-    console.error('Error while Fetching: ' + err);
+    notyf.error('Error while Fetching: ' + err);
   }
 };
 
@@ -51,7 +51,7 @@ const getRestedNotes = async (listItemId, listItem) => {
 
     notyf.success(Notepad.NOTIFICATION_MESSAGES.NOTE_DELETED_SUCCESS);
   } catch (err) {
-    console.error('Error while Fetching: ' + err);
+    notyf.error('Error while Fetching: ' + err);
   }
 };
 
@@ -147,7 +147,7 @@ const uploadInitialNotes = async () => {
 
     createListItemsMarkup(refs.notesList, notes, Notepad);
   } catch (err) {
-    console.error('Error while Fetching: ' + err);
+    notyf.error('Error while Fetching: ' + err);
   }
 };
 
