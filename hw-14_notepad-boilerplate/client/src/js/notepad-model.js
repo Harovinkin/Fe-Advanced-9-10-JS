@@ -149,20 +149,16 @@ export default class Notepad {
      * Принимает: подстроку для поиска в title и body заметки
      * Возвращает: новый массив заметок, контент которых содержит подстроку
      */
-    return new Promise(resolve => {
-      resolve(
-        this._notes.filter(note => {
-          const noteContent = `${note.title} ${note.body}`;
-          const hasQuery = noteContent
-            .toLowerCase()
-            .includes(query.toLowerCase());
+    const foundNote = this._notes.filter(note => {
+      const noteContent = `${note.title} ${note.body}`;
+      const hasQuery = noteContent.toLowerCase().includes(query.toLowerCase());
 
-          if (hasQuery) {
-            return note;
-          }
-        }),
-      );
+      if (hasQuery) {
+        return note;
+      }
     });
+
+    return foundNote;
   }
 
   filterNotesByPriority(priority) {
@@ -173,8 +169,10 @@ export default class Notepad {
      * Принимает: приоритет для поиска в свойстве priority заметки
      * Возвращает: новый массив заметок с подходящим приоритетом
      */
-    return new Promise(resolve => {
-      resolve(this._notes.filter(note => note.priority === priority));
-    });
+    const identicalPriorityNotes = this._notes.filter(
+      note => note.priority === priority,
+    );
+
+    return identicalPriorityNotes;
   }
 }
