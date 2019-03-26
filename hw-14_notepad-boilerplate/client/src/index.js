@@ -119,11 +119,9 @@ const handleListClick = ({ target }) => {
 const handleSearchNotesByQuery = ({ target }) => {
   const inputQuery = target.value;
 
-  notepad
-    .filterNotesByQuery(inputQuery)
-    .then(foundNotes =>
-      createListItemsMarkup(refs.notesList, foundNotes, Notepad),
-    );
+  const foundNote = notepad.filterNotesByQuery(inputQuery);
+
+  createListItemsMarkup(refs.notesList, foundNote, Notepad);
 };
 
 // Writing Modal's text in localStorage
