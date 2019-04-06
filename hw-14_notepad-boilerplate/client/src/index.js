@@ -59,7 +59,7 @@ const getRestedNotes = async (listItemId, listItem) => {
 // ==================
 
 // Open Modal Editor
-const handleOpenModal = ({ target }) => {
+const handleOpenModal = () => {
   MicroModal.show('note-editor-modal');
 
   const savedModalText = storage.load(Notepad.LOCAL_STORAGE.MODAL_TEXT_KEY);
