@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { async } from 'q';
 
 axios.defaults.baseURL = 'http://localhost:3000/';
 
